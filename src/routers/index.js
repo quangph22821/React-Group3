@@ -5,7 +5,7 @@ import routerAuth from "./auth"
 
 const router = express.Router()
 
-router.use("/movies",routerProducts)
+router.use("/products",routerProducts)
 router.use("/category",routerCate)
 router.use("/auth",routerAuth)
 

@@ -2,19 +2,31 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
 
-    title: {
+    name: {
         type: String,
         require: true
     },
-    extract: {
+    price: {
         type: String,
         require: true
     },
-    thumbnail: {
+    description: {
         type: String,
         require: true
     },
-    categoryId: {
+    image:{
+        type:String,
+        require:true
+    },
+    size:{
+        type:Array,
+        require:true
+    },
+    color:{
+        type:Array,
+        require:true
+    },
+    category_Id: {
         type: mongoose.Types.ObjectId,
         ref: "Category",
     },
@@ -27,4 +39,4 @@ const productSchema = new mongoose.Schema({
     },
 )
 
-export default mongoose.model("Movies", productSchema)
+export default mongoose.model("Products", productSchema)

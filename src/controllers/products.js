@@ -1,10 +1,10 @@
-import Movies from "../models/products.js"
+import Products from "../models/products.js"
 import { productSchema } from "../schema/products.js"
 
 
 export const getAll = async(req,res)=>{
     try {
-        const products = await Movies.find().populate("categoryId")
+        const products = await Products.find().populate("category_Id")
         if(products.length===0){
            return res.status(400).json({
                 message:"Danh sách sản phẩm trống"
@@ -23,7 +23,7 @@ export const getAll = async(req,res)=>{
 
 export const getDetail = async(req,res)=>{
     try {
-        const product = await Movies.findById(req.params.id).populate("categoryId")
+        const product = await Products.findById(req.params.id).populate("category_Id")
         if(!product){
             return res.status(400).json({
                 message:"Không tìm thấy sản phẩm"
@@ -49,7 +49,7 @@ export const add = async(req,res)=>{
                 message: error.details[0].message
             })
         }
-        const product = await Movies.create(req.body)
+        const product = await Products.create(req.body)
         if(!product){
             return res.status(400).json({
                 message:"Thêm khôg thành công"
@@ -68,7 +68,7 @@ export const add = async(req,res)=>{
 
 export const remove = async(req,res)=>{
     try {
-        const product = await Movies.findByIdAndDelete(req.params.id)
+        const product = await Products.findByIdAndDelete(req.params.id)
         if(!product){
             return res.status(400).json({
                 message:"Xóa không thành công"
@@ -93,7 +93,7 @@ export const update = async(req,res)=>{
                 message: error.details[0].message
             })
         }
-        const product = await Movies.findByIdAndUpdate(req.params.id,req.body)
+        const product = await Products.findByIdAndUpdate(req.params.id,req.body)
         if(!product){
             return res.status(400).json({
                 message:"Update không thành công"
@@ -106,6 +106,22 @@ export const update = async(req,res)=>{
     } catch (error) {
         return res.status(400).json({
             message:"Lỗi server"
+        })
+    }
+}
+
+export const searchNamePro  = async (req,res)=>{
+    try {
+        const searchName = await Products.find({name:{$regex:req.body.name}})
+        if(searchName.length===0){
+            return res.status(400).json({
+                message:"Sản phẩm không tồn tại"
+            })
+        }
+        return res.status(200).json({searchName})
+    } catch (error) {
+        return res.status(400).json({
+            message:"Lỗi tim kiếm"
         })
     }
 }

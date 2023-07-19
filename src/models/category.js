@@ -9,12 +9,18 @@ const categorySchema = new Schema(
             require: true,
             minLength: 3,
         },
-        products: 
+        image:{
+            type: String,
+            require:true
+        },
+        products:[
+
             {
                 type: mongoose.Types.ObjectId,
                 ref: "Movies"
             }
-        
+            
+        ] 
     },
     {
         timestamps: true,

@@ -21,6 +21,25 @@ export const getAll = async(req,res)=>{
     }
 }
 
+export const getShoesLimit = async(req,res)=>{
+    try {
+        const products = await Products.find().limit(3).populate("category_Id")
+        if(products.length===0){
+           return res.status(400).json({
+                message:"Danh sách sản phẩm trống"
+            })
+        }
+        return res.status(200).json({
+            message:"Lấy danh sách thành công",
+            data: products
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message:"Lỗi server"
+        })
+    }
+}
+
 export const getDetail = async(req,res)=>{
     try {
         const product = await Products.findById(req.params.id).populate("category_Id")

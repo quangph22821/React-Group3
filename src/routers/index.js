@@ -5,7 +5,7 @@ import routerAuth from "./auth"
 
 const router = express.Router()
 
-router.use("/products",routerProducts)
+router.use("/shoes",routerProducts)
 router.use("/category",routerCate)
 router.use("/auth",routerAuth)
 

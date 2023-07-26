@@ -62,12 +62,12 @@ export const getDetail = async(req,res)=>{
 export const add = async(req,res)=>{
 
     try {
-        const {error} = productSchema.validate(req.body)
-        if(error){
-            return res.status(400).json({
-                message: error.details[0].message
-            })
-        }
+        // // const {error} = productSchema.validate(req.body)
+        // if(error){
+        //     return res.status(400).json({
+        //         message: error.details[0].message
+        //     })
+        // }
         const product = await Products.create(req.body)
         if(!product){
             return res.status(400).json({
@@ -106,12 +106,12 @@ export const remove = async(req,res)=>{
 
 export const update = async(req,res)=>{
     try {
-        const {error} = productSchema.validate(req.body)
-        if(error){
-            return res.status(400).json({
-                message: error.details[0].message
-            })
-        }
+        // const {error} = productSchema.validate(req.body)
+        // if(error){
+        //     return res.status(400).json({
+        //         message: error.details[0].message
+        //     })
+        // }
         const product = await Products.findByIdAndUpdate(req.params.id,req.body)
         if(!product){
             return res.status(400).json({

@@ -17,7 +17,7 @@ const categorySchema = new Schema(
 
             {
                 type: mongoose.Types.ObjectId,
-                ref: "Movies"
+                ref: "Products"
             }
             
         ] 

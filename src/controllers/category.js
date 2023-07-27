@@ -106,12 +106,12 @@ export const remove = async(req,res)=>{
 
 export const update = async(req,res)=>{
     try {
-        const {error} = categorySchema.validate(req.body)
-        if(error){
-            return res.status(400).json({
-                message: error.details[0].message
-            })
-        }
+        // const {error} = categorySchema.validate(req.body)
+        // if(error){
+        //     return res.status(400).json({
+        //         message: error.details[0].message
+        //     })
+        // }
         const category = await Category.findByIdAndUpdate(req.params.id,req.body)
         if(!category){
             return res.status(400).json({

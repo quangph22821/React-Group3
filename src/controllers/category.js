@@ -42,7 +42,7 @@ export const getCateLimit = async(req,res)=>{
 
 export const getDetail = async(req,res)=>{
     try {
-        const category = await Category.findById(req.params.id)
+        const category = await Category.findById(req.params.id).populate("products")
         if(!category){
             return res.status(400).json({
                 message:"Không tìm thấy sản phẩm"

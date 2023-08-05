@@ -1,7 +1,6 @@
 
 import { Link } from "react-router-dom";
 import { useFetchProductsQuery } from "../service/products.service"
-import { IProduct } from "../interface/Product";
 
 
 const ShopPage = () => {

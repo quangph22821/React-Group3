@@ -1,4 +1,5 @@
 import Category from "../models/category.js"
+import Products from "../models/products.js"
 import { categorySchema } from "../schema/category.js"
 
 
@@ -48,9 +49,13 @@ export const getDetail = async(req,res)=>{
                 message:"Không tìm thấy sản phẩm"
             })
         }
+        const products = await Products.find({ category_Id: req.params.id });
         return res.status(200).json({
             message:"Lấy thành công sản phẩm",
-            data: category
+            data: {
+                ...category.toObject(),
+                products,
+            }
         })
     } catch (error) {
         return res.status(500).json({

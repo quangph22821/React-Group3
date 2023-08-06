@@ -11,6 +11,9 @@ import ContactPage from './pages/Contact'
 import LayoutUser from './components/layout/LayoutUser'
 import ListProducts from './pages/admin/products/ListProducts'
 import LayoutAdmin from './components/layout/LayoutAdmin'
+import ListCategory from './pages/admin/category/ListCategory'
+import CreateCategory from './pages/admin/category/CreateCategory'
+import CreateProducts from './pages/admin/products/CreateProduct'
 
 function App() {
 
@@ -28,10 +31,12 @@ function App() {
         </Route>
         <Route path="/admin" element={<LayoutAdmin />}>
           <Route path="home" element={<ListProducts />} />
+          <Route path="addProduct" element={<CreateProducts />} />
+          <Route path="category" element={<ListCategory />} />
+          <Route path="addcategory" element={<CreateCategory />} />
           {/* <Route path="product/:id" element={<ProductUpdate />} />
-          <Route path="product" element={<ProductAdd />} />
-          <Route path="category" element={<Admincategory />} />
-          <Route path="addcategory" element={<AddCategoryy />} />
+          
+          
           <Route path="update/:id" element={<CategoryUpdate />} /> */}
         </Route>
       </Routes>

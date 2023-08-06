@@ -1,6 +1,8 @@
 import { Link, Outlet } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const LayoutUser = () => {
+    const { cartTotalQuantity } = useSelector((state: any) => state.cart)
     return <>
         {/* HEADER */}
         <nav className="navbar navbar-expand-lg navbar-light shadow">
@@ -69,15 +71,15 @@ const LayoutUser = () => {
                         >
                             <i className="fa fa-fw fa-search text-dark mr-2" />
                         </a>
-                        <a
+                        <Link
                             className="nav-icon position-relative text-decoration-none"
-                            href="#"
+                            to="/cart"
                         >
                             <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1" />
-                            {/* <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                      7
-                  </span> */}
-                        </a>
+                            <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+                                {cartTotalQuantity}
+                            </span>
+                        </Link>
                         <Link
                             className="nav-icon position-relative text-decoration-none"
                             to="/signup"
@@ -288,7 +290,7 @@ const LayoutUser = () => {
 
         {/* END HEADER */}
 
-        <Outlet/>
+        <Outlet />
 
         {/* FOOTTER */}
 

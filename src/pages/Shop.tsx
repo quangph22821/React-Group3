@@ -4,8 +4,8 @@ import { useFetchProductsQuery } from "../service/products.service"
 
 
 const ShopPage = () => {
-    const {data} = useFetchProductsQuery()
-    
+    const { data } = useFetchProductsQuery()
+
     return <>
         {/* Start Content */}
         <div className="container py-5">
@@ -17,26 +17,28 @@ const ShopPage = () => {
                     </ul>
                 </div>
                 <div className="col-lg-9">
-                    <div className="col-md-6 pb-4">
-                        <div className="d-flex">
-                            {/* <select
-                                className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
-                                value={selectedCategory || ""}
-                                onChange={handleChange}
-                            >
-                                <option value=''>All Categories</option>
-                                {category?.map((category: any) => (
-                                    <option key={category._id} value={category._id}>
-                                        {category.name}
-                                    </option>
-                                ))}
-                            </select> */}
+                    <div className="row">
+                        <div className="col-md-6">
+                            <input
+                                type="text"
+                                name=""
+                                placeholder="Tìm kiếm"
+
+                            />
+                        </div>
+                        <div className="col-md-6 pb-4">
+                            <div className="d-flex">
+                                <select className="form-control">
+                                    <option>Featured</option>
+                                    <option>A to Z</option>
+                                    <option>Item</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div className="row">
                         {data?.data?.map((item: any) =>
                             <div className="col-md-4">
-
                                 <div className="card mb-4 product-wap rounded-0">
                                     <div className="card rounded-0">
                                         <img className="card-img rounded-0 img-fluid" src={item.image} />

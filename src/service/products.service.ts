@@ -6,11 +6,13 @@ const productAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:8088"
     }),
+    tagTypes: ["product"],
     endpoints: buider => ({
 
         // LẤY TẤT CẢ SẢN PHẨM
         fetchProducts: buider.query<IProduct[], void>({
             query: (arg: void) => "/shoes/shop",
+            providesTags: ["product"]
         }),
 
         // LẤY LIMIT SẢN PHẨM
@@ -21,15 +23,44 @@ const productAPI = createApi({
         // LẤY MỘT SẢN PHẨM
         DetailProduct: buider.query({
             query: (_id) => ({ url: `shoes/${_id}` }),
-        })
-    })
-})
+        }),
 
+        // XÓA ADMIN
+        removeProducts: buider.mutation({
+            query: (_id: string) => ({
+                url: "/shoes/" + _id,
+                method: "DELETE"
+            }),
+            invalidatesTags: ['product']
+        }),
+
+        // Thêm mới 
+        addProducts: buider.mutation({
+            query: (product: {
+                name: string,
+                price: number,
+                image: string,
+                description: string
+
+            }) => ({
+                url: "/shoes",
+                method: "POST",
+                body: product
+            }),
+            invalidatesTags: ['product']
+        }),
+    })
+
+
+
+
+})
 
 export const {
     useFetchProductsQuery,
-    useLimitProductsQuery,
-    useDetailProductQuery
-} = productAPI
+    useRemoveProductsMutation,
+    useAddProductsMutation,
+    useDetailProductQuery,
+    useLimitProductsQuery } = productAPI
 
 export default productAPI

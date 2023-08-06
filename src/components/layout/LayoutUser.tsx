@@ -82,7 +82,7 @@ const LayoutUser = () => {
                         </Link>
                         <Link
                             className="nav-icon position-relative text-decoration-none"
-                            to="/signup"
+                            to="/signin"
                         >
                             <i className="fa fa-fw fa-user text-dark mr-3" />
                             {/* <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">

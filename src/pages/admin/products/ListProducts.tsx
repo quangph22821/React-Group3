@@ -39,7 +39,7 @@ const ListProducts = () => {
                         <td>{item.description}</td>
                         <td>
                             <button className="btn btn-warning" onClick={() => { handleDelete(item._id) }}>Xóa</button>
-                            <Link to="" className="btn btn-danger mx-2">Sửa</Link>
+                            <Link to={`/admin/product/${item._id}`} className="btn btn-danger mx-2">Sửa</Link>
                         </td>
                     </tr>
                 )}

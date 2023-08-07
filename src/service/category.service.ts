@@ -14,6 +14,10 @@ const categoryAPI = createApi({
             providesTags: ["category"]
         }),
 
+        DetailCategory: buider.query({
+            query: (_id) => ({ url: `category/${_id}` }),
+        }),
+
         // XÓA category
         removeCategory: buider.mutation({
             query: (_id: string) => ({
@@ -49,6 +53,7 @@ export const {
     useFetchCategoryQuery,
     useRemoveCategoryMutation,
     useAddCategoryMutation,
-    useUpdateCategoryMutation } = categoryAPI
+    useUpdateCategoryMutation, 
+    useDetailCategoryQuery } = categoryAPI
 
 export default categoryAPI

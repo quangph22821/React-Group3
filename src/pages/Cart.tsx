@@ -30,7 +30,7 @@ const CartPage = () => {
 
     return (<div className="cart-container">
         <h2>Shopping Cart</h2>
-        {cart.cartItems.length === 0 ? (
+        {cart.length === 0 ? (
             <div className="cart-empty">
                 <p>Your cart is currently empty </p>
                 <div className="start-shopping">

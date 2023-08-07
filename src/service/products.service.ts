@@ -49,6 +49,16 @@ const productAPI = createApi({
             }),
             invalidatesTags: ['product']
         }),
+
+        // SỬA SẢN PHẨM
+        updateProduct: buider.mutation({
+            query: (product: IProduct) => ({
+                url: `/shoes/${product._id}`,
+                method: "PUT",
+                body: product
+            }),
+            invalidatesTags: ['product']
+        })
     })
 
 
@@ -61,6 +71,8 @@ export const {
     useRemoveProductsMutation,
     useAddProductsMutation,
     useDetailProductQuery,
-    useLimitProductsQuery } = productAPI
+    useLimitProductsQuery,
+    useUpdateProductMutation 
+ } = productAPI
 
 export default productAPI

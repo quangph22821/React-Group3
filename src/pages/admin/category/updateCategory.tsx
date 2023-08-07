@@ -1,23 +1,41 @@
-import {useForm} from 'react-hook-form'
-import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from 'react-hook-form'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useUpdateCategoryMutation } from '../../../service/category.service'
-import { updateCategorySchema, updateFormCategory } from '../../../interface/category'
+import { useDetailCategoryQuery, useUpdateCategoryMutation } from '../../../service/category.service'
+import { getByIdProduct } from '../../../api/products'
+import { getByIdCategory } from '../../../api/category'
+
+type updateFormCategory = {
+    _id: string
+    name: string,
+    image: string
+}
 
 const UpdateCategory = () => {
     const _id = useParams().id
+    const navigate = useNavigate()
+    const { data } = useDetailCategoryQuery(_id)
     const [editCategory] = useUpdateCategoryMutation()
-    
+    console.log(data);
 
-    const { register, handleSubmit, formState: { errors } } = useForm<updateFormCategory>()
+    const { register, handleSubmit, formState: { errors } } = useForm<updateFormCategory>({
+        defaultValues: async () => {
+            if (_id) {
+                return await fetCategoryById(_id)
+            }
+        },
+    })
 
-    const onSubmit = async (data: updateFormCategory) => {
+    const fetCategoryById = async (id: string) => {
+        const { data } = await getByIdCategory(id)
+        return data
+    }
+
+    const onSubmit = async (data: updateFormCategory, _id: string) => {
         try {
             if (_id) {
-                const response = await update(id, data)
-                navigate('/admin')
+                const response = await editCategory(data)
+                navigate('/admin/category')
             }
-
         } catch (error) {
 
         }
@@ -26,17 +44,17 @@ const UpdateCategory = () => {
     return <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
             <label className="form-label">Name</label>
-            <input type="text"  className="form-control" placeholder="" aria-describedby="helpId"
-            {...register("name")}
+            <input type="text" className="form-control" placeholder="" aria-describedby="helpId"
+                {...register("name")}
             />
         </div>
         <div className="mb-3">
             <label className="form-label">Image</label>
-            <input type="text"  className="form-control" placeholder="" aria-describedby="helpId" 
-            {...register("image")}
+            <input type="text" className="form-control" placeholder="" aria-describedby="helpId"
+                {...register("image")}
             />
         </div>
-        <button className="btn btn-success">Thêm mới</button>
+        <button className="btn btn-success">Cập nhật</button>
     </form>
 }
 

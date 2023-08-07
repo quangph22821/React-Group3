@@ -19,6 +19,7 @@ import CreateProducts from './pages/admin/products/CreateProduct'
 import CartPage from './pages/Cart'
 import PayPage from './pages/Pay'
 import UpdateCategory from './pages/admin/category/updateCategory'
+import UpdateProduct from './pages/admin/products/UpdateProduct'
 
 function App() {
 
@@ -43,7 +44,7 @@ function App() {
           <Route path="category" element={<ListCategory />} />
           <Route path="addcategory" element={<CreateCategory />} />
           <Route path="editCate/:id" element={<UpdateCategory />} />
-          {/* <Route path="product/:id" element={<ProductUpdate />} /> */}
+          <Route path="product/:id" element={<UpdateProduct />} />
           
           
         </Route>

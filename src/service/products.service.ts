@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { IProduct } from "../interface/Product"
+import { toast } from "react-toastify"
 
 const productAPI = createApi({
     reducerPath: "products",
@@ -56,7 +57,9 @@ const productAPI = createApi({
                 url: `/shoes/${product._id}`,
                 method: "PUT",
                 body: product
+                
             }),
+            
             invalidatesTags: ['product']
         })
     })

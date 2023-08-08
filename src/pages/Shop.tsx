@@ -1,10 +1,28 @@
 
 import { Link } from "react-router-dom";
 import { useFetchProductsQuery } from "../service/products.service"
+import { useEffect, useState } from "react"
+import { ICategory } from "../interface/category";
+import { getAllCate } from "../api/category";
+import { ListCategory } from "../components/category/categoryList";
 
 
 const ShopPage = () => {
     const { data } = useFetchProductsQuery()
+    const [products, setProducts] = useState<ICategory[]>([])
+
+    const fetchProducts = async () => {
+        try {
+            const { data } = await getAllCate()
+            setProducts(data)
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
 
     return <>
         {/* Start Content */}
@@ -12,9 +30,10 @@ const ShopPage = () => {
             <div className="row">
                 <div className="col-lg-3">
                     <h1 className="h2 pb-4">Categories</h1>
-                    <ul className="list-unstyled templatemo-accordion">
-                        {/* {category.map((item: ICategory) => <ListCategory data={item} key={item._id} />)} */}
-                    </ul>
+                    <p>Nike</p>
+                    <p>Puma</p>
+                    <p>Adidas</p>
+                    <p>Kamito</p>
                 </div>
                 <div className="col-lg-9">
                     <div className="row">

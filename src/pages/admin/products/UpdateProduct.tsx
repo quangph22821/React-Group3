@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ICategory } from '../../../interface/category'
 import { useUpdateCategoryMutation } from '../../../service/category.service'
 import { getByIdProduct } from '../../../api/products'
+import { toast } from "react-toastify"
 
 
 type updateFormProducts = {
@@ -37,6 +38,10 @@ const UpdateProduct = () => {
             if (_id) {
                 const response = await editProduct(data)
                 navigate('/admin/home')
+                toast.info(`Sửa sản phẩm thành công`, {
+                    position: "bottom-left",
+
+                })
             }
         } catch (error) {
 
@@ -48,26 +53,42 @@ const UpdateProduct = () => {
         <div className="mb-3">
             <label className="form-label">Name</label>
             <input type="text" className="form-control" placeholder="" aria-describedby="helpId"
-                {...register("name")}
+                {...register("name",
+                    {
+                        required: "Dữ liệu không được để trống",
+                    })}
             />
+            <div className="text-red-500">{errors.name && errors.name.message}</div>
         </div>
         <div className="mb-3">
             <label className="form-label">Price</label>
             <input type="text" className="form-control" placeholder="" aria-describedby="helpId"
-                {...register("price")}
+                {...register("price",
+                    {
+                        required: "Dữ liệu không được để trống",
+                    })}
             />
+            <div className="text-red-500">{errors.price && errors.price.message}</div>
         </div>
         <div className="mb-3">
             <label className="form-label">Image</label>
             <input type="text" className="form-control" placeholder="" aria-describedby="helpId"
-                {...register("image")}
+                {...register("image",
+                    {
+                        required: "Dữ liệu không được để trống",
+                    })}
             />
+            <div className="text-red-500">{errors.image && errors.image.message}</div>
         </div>
         <div className="">
             <label className="form-label">Desc</label>
-            <input type="text" className="form-control" placeholder="" aria-describedby="helpId"
-                {...register("description")}
+            <textarea className="form-control" placeholder="" aria-describedby="helpId"
+                {...register("description",
+                    {
+                        required: "Dữ liệu không được để trống",
+                    })}
             />
+            <div className="text-red-500">{errors.description && errors.description.message}</div>
         </div>
         {/* <select 
             {...register("category_Id")}

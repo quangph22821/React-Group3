@@ -1,10 +1,26 @@
 import { Link } from "react-router-dom"
 import { useLimitProductsQuery } from "../service/products.service"
-// import { useLimitCategoryQuery } from "../service/category.service"
+import { useEffect, useState} from "react"
+import { getLimitCategory } from "../api/category"
+import { ICategory } from "../interface/category"
 
 
 const HomePage = () => {
   const { data } = useLimitProductsQuery()
+  const [products, setProducts] = useState<ICategory[]>([])
+
+    const fetchProducts = async () => {
+        try {
+            const {data} = await getLimitCategory()
+            setProducts(data)
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
   // const { data } = useLimitCategoryQuery()
   return <>
     {/* Start Categories of The Month */}
@@ -19,7 +35,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="row">
-        {/* {data?.data?.map((item: any) =>
+        {products?.map((item: any) =>
           <div className="col-12 col-md-4 p-5 mt-3">
             <Link to="#">
               <img
@@ -29,10 +45,10 @@ const HomePage = () => {
             </Link>
             <h5 className="text-center mt-3 mb-3">{item.name}</h5>
             <p className="text-center">
-              <Link to="" className="btn btn-success">Go Shop</Link>
+              <Link to="/shop" className="btn btn-success">Go Shop</Link>
             </p>
           </div>
-        )} */}
+        )}
       </div>
     </section>
     {/* End Categories of The Month */}
